@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  isOn: null
+  isOn: null,
+  level: null
 });

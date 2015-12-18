@@ -1,6 +1,7 @@
 <div id="display">
   {{#if isOn}}
     ON
+    {{level}}
   {{else}}
     OFF
   {{/if}}
@@ -12,4 +13,8 @@
 
 <button {{action 'turnOn'}}>
   ON
+</button>
+
+<button {{action 'nextLevel'}}>
+  LEVEL
 </button>

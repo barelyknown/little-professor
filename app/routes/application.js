@@ -1,16 +1,32 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  levels: [1,2,3,4],
+
   setupController(controller) {
     controller.set('isOn', false);
   },
+
   actions: {
     turnOn() {
-      this.controllerFor('application').set('isOn', true);
-      this.set('isOn', true);
+      const c = this.controllerFor('application');
+      c.set('isOn', true);
+      c.set('level', this.get('levels').objectAt(0));
     },
     turnOff() {
-      this.controllerFor('application').set('isOn', false);
+      const c = this.controllerFor('application');
+      c.set('isOn', false);
+    },
+    nextLevel() {
+      if (this.controllerFor('application').get('isOn')) {
+        const c = this.controllerFor('application');
+        const level = c.get('level');
+        const levelIndex = this.get('levels').indexOf(level);
+        const nextLevel = this.get('levels').objectAt(
+          (levelIndex + 1) % this.get('levels').length
+        );
+        c.set('level', nextLevel);
+      }
     }
   }
 });
