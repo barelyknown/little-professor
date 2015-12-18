@@ -115,6 +115,10 @@ export default Ember.Controller.extend({
             termOne = t[uniqueRandomIndexes[problems.length]][0];
             termTwo = t[uniqueRandomIndexes[problems.length]][1];
             break;
+          case '-':
+            termOne = Math.floor(Math.random() * (10 + 1));
+            termTwo = Math.floor(Math.random() * (termOne + 1));
+            break;
           default:
             termOne = Math.floor(Math.random() * 10);
             termTwo = Math.floor(Math.random() * 10);
