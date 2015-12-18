@@ -12,7 +12,7 @@ export function formatOperator(params/*, hash*/) {
     case "*":
       formatted = "&times;";
       break;
-    case "%":
+    case "/":
       formatted = "&divide;";
       break;
   }
