@@ -5,7 +5,21 @@
       L
       {{level}}
     {{else if (eq mode 'game')}}
-      GAME
+      {{#if isComplete}}
+        <span class="blink">
+          {{correctAnswerCount}}
+        </span>
+      {{else}}
+        {{#if isIncorrect}}
+          EEE
+        {{else}}
+          {{problem.termOne}}
+          {{format-operator problem.operator}}
+          {{problem.termTwo}}
+          =
+          {{answer}}
+        {{/if}}
+      {{/if}}
     {{/if}}
   {{else}}
     &nbsp;
@@ -24,7 +38,7 @@
   LEVEL
 </button>
 
-<button {{action 'playGame'}}>
+<button {{action 'go'}}>
   GO
 </button>
 
@@ -39,3 +53,11 @@
 {{change-operator-button operator='%' onClick=(action 'changeOperator')}}
 
 {{change-operator-button operator='*' onClick=(action 'changeOperator')}}
+
+<div>
+  {{#each digits as |digit|}}
+    <button {{action 'pressDigit' digit}}>
+      {{digit}}
+    </button>
+  {{/each}}
+</div>
