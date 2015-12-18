@@ -12,14 +12,15 @@ export default Ember.Route.extend({
       const c = this.controllerFor('application');
       c.set('isOn', true);
       c.set('level', this.get('levels').objectAt(0));
+      c.set('operator', '+');
     },
     turnOff() {
       const c = this.controllerFor('application');
       c.set('isOn', false);
     },
     nextLevel() {
-      if (this.controllerFor('application').get('isOn')) {
-        const c = this.controllerFor('application');
+      const c = this.controllerFor('application');
+      if (c.get('isOn')) {
         const level = c.get('level');
         const levelIndex = this.get('levels').indexOf(level);
         const nextLevel = this.get('levels').objectAt(

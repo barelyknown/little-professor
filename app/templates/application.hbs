@@ -1,9 +1,10 @@
 <div id="display">
   {{#if isOn}}
-    ON
+    {{format-operator operator}}
+    L
     {{level}}
   {{else}}
-    OFF
+    &nbsp;
   {{/if}}
 </div>
 
@@ -18,3 +19,11 @@
 <button {{action 'nextLevel'}}>
   LEVEL
 </button>
+
+{{change-operator-button operator='+' onClick=(action 'changeOperator')}}
+
+{{change-operator-button operator='-' onClick=(action 'changeOperator')}}
+
+{{change-operator-button operator='%' onClick=(action 'changeOperator')}}
+
+{{change-operator-button operator='*' onClick=(action 'changeOperator')}}
