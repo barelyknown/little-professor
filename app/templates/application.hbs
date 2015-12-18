@@ -1,8 +1,12 @@
 <div id="display">
   {{#if isOn}}
-    {{format-operator operator}}
-    L
-    {{level}}
+    {{#if (eq mode 'settings')}}
+      {{format-operator operator}}
+      L
+      {{level}}
+    {{else if (eq mode 'game')}}
+      GAME
+    {{/if}}
   {{else}}
     &nbsp;
   {{/if}}
@@ -18,6 +22,14 @@
 
 <button {{action 'nextLevel'}}>
   LEVEL
+</button>
+
+<button {{action 'playGame'}}>
+  GO
+</button>
+
+<button {{action 'changeSettings'}}>
+  SET
 </button>
 
 {{change-operator-button operator='+' onClick=(action 'changeOperator')}}
