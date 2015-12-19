@@ -1,0 +1,10 @@
+<div class="button-item">
+  <div class="button-label">
+    {{#if label}}
+      {{label}}
+    {{else}}
+      {{value}}
+    {{/if}}
+  </div>
+  <button {{action 'press'}}></button>
+</div>

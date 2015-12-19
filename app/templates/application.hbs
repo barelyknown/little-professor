@@ -1,63 +1,76 @@
-<div id="display">
-  {{#if isOn}}
-    {{#if (eq mode 'settings')}}
-      {{format-operator operator}}
-      L
-      {{level}}
-    {{else if (eq mode 'game')}}
-      {{#if isComplete}}
-        <span class="blink">
-          {{correctAnswerCount}}
-        </span>
-      {{else}}
-        {{#if isIncorrect}}
-          EEE
-        {{else}}
-          {{problem.termOne}}
-          {{format-operator problem.operator}}
-          {{problem.termTwo}}
-          =
-          {{answer}}
+<div id="little-professor">
+  <div id="display">
+    <div class="display-characters">
+      {{#if isOn}}
+        {{#if (eq mode 'settings')}}
+          {{format-operator operator}}
+          L
+          {{level}}
+        {{else if (eq mode 'game')}}
+          {{#if isComplete}}
+            <span class="blink">
+              {{correctAnswerCount}}
+            </span>
+          {{else}}
+            {{#if isIncorrect}}
+              EEE
+            {{else}}
+              {{problem.termOne}}
+              {{format-operator problem.operator}}
+              {{problem.termTwo}}
+              =
+              {{answer}}
+            {{/if}}
+          {{/if}}
         {{/if}}
+      {{else}}
+        &nbsp;
       {{/if}}
-    {{/if}}
-  {{else}}
-    &nbsp;
-  {{/if}}
-</div>
+    </div>
+  </div>
+  <div id="main">
+    <div id="face">
+      &nbsp;
+    </div>
+    <div id="buttons">
+      <div class="button-row">
+        {{labeled-button label='OFF' onPress=(action 'turnOff')}}
+        <div class="button-item">&nbsp;</div>
+        {{labeled-button label='SET' onPress=(action 'changeSettings')}}
+        {{labeled-button label='LEVEL' onPress=(action 'nextLevel')}}
+      </div>
 
-<button {{action 'turnOff'}}>
-  OFF
-</button>
+      <div class="button-row">
+        {{labeled-button value=7 onPress=(action 'pressDigit')}}
+        {{labeled-button value=8 onPress=(action 'pressDigit')}}
+        {{labeled-button value=9 onPress=(action 'pressDigit')}}
+        {{labeled-button value='/' label=(format-operator '/') onPress=(action 'changeOperator')}}
+      </div>
 
-<button {{action 'turnOn'}}>
-  ON
-</button>
+      <div class="button-row">
+        {{labeled-button value=4 onPress=(action 'pressDigit')}}
+        {{labeled-button value=5 onPress=(action 'pressDigit')}}
+        {{labeled-button value=6 onPress=(action 'pressDigit')}}
+        {{labeled-button value='*' label=(format-operator '*') onPress=(action 'changeOperator')}}
+      </div>
 
-<button {{action 'nextLevel'}}>
-  LEVEL
-</button>
+      <div class="button-row">
+        {{labeled-button value=1 onPress=(action 'pressDigit')}}
+        {{labeled-button value=2 onPress=(action 'pressDigit')}}
+        {{labeled-button value=3 onPress=(action 'pressDigit')}}
+        {{labeled-button value='-' label=(format-operator '-') onPress=(action 'changeOperator')}}
+      </div>
 
-<button {{action 'go'}}>
-  GO
-</button>
+      <div class="button-row">
+        {{labeled-button label='ON' onPress=(action 'turnOn')}}
+        {{labeled-button value=0 onPress=(action 'pressDigit')}}
+        {{labeled-button label='GO' onPress=(action 'go')}}
+        {{labeled-button value='+' label=(format-operator '+') onPress=(action 'changeOperator')}}
+      </div>
 
-<button {{action 'changeSettings'}}>
-  SET
-</button>
-
-{{change-operator-button operator='+' onClick=(action 'changeOperator')}}
-
-{{change-operator-button operator='-' onClick=(action 'changeOperator')}}
-
-{{change-operator-button operator='/' onClick=(action 'changeOperator')}}
-
-{{change-operator-button operator='*' onClick=(action 'changeOperator')}}
-
-<div>
-  {{#each digits as |digit|}}
-    <button {{action 'pressDigit' digit}}>
-      {{digit}}
-    </button>
-  {{/each}}
+      <div id="product-name">
+        Little Professor &#8482;
+      </div>
+    </div>
+  </div>
 </div>
