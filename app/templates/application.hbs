@@ -1,33 +1,27 @@
 <div id="little-professor">
-  <div id="display">
-    <div class="display-characters">
-      {{#if isOn}}
-        {{#if (eq mode 'settings')}}
-          {{format-operator operator}}
-          L
-          {{level}}
-        {{else if (eq mode 'game')}}
-          {{#if isComplete}}
-            <span class="blink">
-              {{correctAnswerCount}}
-            </span>
-          {{else}}
-            {{#if isIncorrect}}
-              EEE
-            {{else}}
-              {{problem.termOne}}
-              {{format-operator problem.operator}}
-              {{problem.termTwo}}
-              =
-              {{answer}}
-            {{/if}}
-          {{/if}}
-        {{/if}}
+  {{#if isOn}}
+    {{#if (eq mode 'settings')}}
+      {{render-display operator=operator level=level}}
+    {{else if (eq mode 'game')}}
+      {{#if isComplete}}
+        {{render-display answer=correctAnswerCount blink=true}}
       {{else}}
-        &nbsp;
+        {{#if isIncorrect}}
+          {{render-display isError=true}}
+        {{else}}
+          {{render-display
+            operator=problem.operator
+            termOne=problem.termOne
+            termTwo=problem.termTwo
+            isEqualVisible=true
+            answer=answer
+          }}
+        {{/if}}
       {{/if}}
-    </div>
-  </div>
+    {{/if}}
+  {{else}}
+    {{render-display}}
+  {{/if}}
   <div id="main">
     <div id="face">
       &nbsp;

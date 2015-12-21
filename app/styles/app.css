@@ -86,7 +86,7 @@ button {
   height: 1.5em;
 }
 
-#display {
+.display {
   height: 15%;
   background-color: #ba0c18;
   color: #fcd9e9;
@@ -119,4 +119,9 @@ button {
 .button-label {
   margin-bottom: 5px;
   font-size: 1.2em;
+}
+
+.display-character {
+  width: 20px;
+  display: inline-block;
 }

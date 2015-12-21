@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ProblemGenerator from 'little-professor/models/problem-generator';
+const { isPresent } = Ember;
 
 export default Ember.Controller.extend({
   levels: [1,2,3,4],
@@ -9,19 +10,19 @@ export default Ember.Controller.extend({
   isRetrying: Ember.computed.gt('tryCount', 0),
 
   problem: Ember.computed('problems', 'problemIndex', function() {
-    if (Ember.isPresent(this.get('problems')) && Ember.isPresent(this.get('problemIndex'))) {
+    if (isPresent(this.get('problems')) && isPresent(this.get('problemIndex'))) {
       return this.get('problems').objectAt(this.get('problemIndex'));
     }
   }),
 
   isComplete: Ember.computed('problems', 'problemIndex', function() {
-    if (Ember.isPresent(this.get('problemIndex')) && Ember.isPresent(this.get('problems'))) {
+    if (isPresent(this.get('problemIndex')) && isPresent(this.get('problems'))) {
       return this.get('problemIndex') >= this.get('problems').length;
     }
   }),
 
   isAnswerComplete: Ember.computed('answer', 'problem.answer', function() {
-    if ((this.get('answer') || this.get('answer') === 0) && (this.get('problem.answer') || this.get('problem.answer') === 0)) {
+    if ((isPresent(this.get('answer'))) && (isPresent(this.get('problem.answer')))) {
       return this.get('answer').toString().length === this.get('problem.answer').toString().length;
     } else {
       return false;
@@ -77,7 +78,7 @@ export default Ember.Controller.extend({
       this.set('isAnswerLocked', false);
       this.set('isIncorrect', false);
       this.set('tryCount', 0);
-      if (Ember.isPresent(this.get('problemIndex'))) {
+      if (isPresent(this.get('problemIndex'))) {
         this.incrementProperty('problemIndex');
       } else {
         this.set('problemIndex', 0);
@@ -181,8 +182,8 @@ export default Ember.Controller.extend({
                   this.toggleProperty('isDisplayingAnswer');
                   this.set('isAnswerLocked', true);
                 } else {
-                  this.set('isAnswerLocked', false);
                   this.set('answer', null);
+                  this.set('isAnswerLocked', false);
                 }
               }, 1000);
             }, 500);

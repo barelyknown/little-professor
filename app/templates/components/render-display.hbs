@@ -1,0 +1,35 @@
+<div class="display-characters">
+  {{format-term termOne}}
+
+  <span class="display-character">
+    {{#if operator}}
+      {{format-operator operator}}
+    {{/if}}
+  </span>
+
+  {{format-term termTwo}}
+
+  <span class="display-character">
+    {{#if isEqualVisible}}
+      =
+    {{/if}}
+  </span>
+
+  {{#if level}}
+    <span class="display-character">L</span>
+    <span class="display-character"></span>
+    <span class="display-character">{{level}}</span>
+  {{else if isError}}
+    <span class="display-character">E</span>
+    <span class="display-character">E</span>
+    <span class="display-character">E</span>
+  {{else}}
+    {{#if blink}}
+      <span class="blink">
+        {{format-term answer}}
+      </span>
+    {{else}}
+      {{format-term answer}}
+    {{/if}}
+  {{/if}}
+</div>
