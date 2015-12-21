@@ -33,6 +33,7 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
+  background-color: #e5dbd0;
 }
 
 body > .ember-view {
@@ -40,7 +41,20 @@ body > .ember-view {
 }
 
 #little-professor {
+  position: relative;
   height: 100%;
+  min-width: 320px;
+  min-height: 480px;
+}
+
+@media screen and (min-width: 540px) {
+  #little-professor {
+    margin-top: 20px;
+    width: 375px;
+    height: 667px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 #main {
@@ -109,11 +123,14 @@ button {
 }
 
 #product-name {
+  font-family: sans-serif;
+  font-size: 14px;
   position: absolute;
-  bottom: 10px;
+  bottom: 8px;
   text-align: center;
-  width: 80%;
-  font-weight: bold;
+  width: 100%;
+  font-weight: normal;
+  color: white;
 }
 
 .button-label {
