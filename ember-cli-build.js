@@ -4,7 +4,7 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var env = EmberApp.env();
 
-var isProduction = ['staging'].indexOf(env) > -1;
+var isProduction = ['production'].indexOf(env) > -1;
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
