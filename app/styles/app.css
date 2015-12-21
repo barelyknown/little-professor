@@ -61,7 +61,7 @@ body > .ember-view {
   height: 85%;
   padding-left: 5%;
   padding-right: 5%;
-  background-image: url("/images/little-professor-background.jpg");
+  background-image: url("/assets/images/little-professor-background.jpg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
