@@ -11,7 +11,7 @@ module.exports = function(defaults) {
     // Add options here
     fingerprint: {
       enabled: isProduction,
-      extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg'],
+      extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg', 'ico'],
       prepend: 'https://s3.amazonaws.com/assets.littleprofessor.barelyknown.com/',
     }
   });
