@@ -35,24 +35,6 @@ export default Ember.Controller.extend({
     }
   }),
 
-  wholeNumberDivisionTuples: Ember.computed(function() {
-    const tuples = [];
-    const max = 100;
-    var numerator = 1;
-    while (numerator <= max) {
-      var denominator = 1;
-      while (denominator <= max) {
-        let answer = numerator / denominator;
-        if (answer % denominator === 0) {
-          tuples.pushObject([numerator, denominator]);
-        }
-        denominator += 1;
-      }
-      numerator += 1;
-    }
-    return tuples;
-  }),
-
   actions: {
     turnOn() {
       if (!this.get('isOn')) {
@@ -105,23 +87,7 @@ export default Ember.Controller.extend({
       this.set('isDisplayingAnswer', false);
       var problemCount = 0;
       const problems = [];
-      const uniqueRandomIndexes = [];
-      const t = this.get('wholeNumberDivisionTuples');
-      while (uniqueRandomIndexes.length < 4) {
-        const index = Math.floor(Math.random() * t.length);
-        if (!uniqueRandomIndexes.contains(index)) {
-          uniqueRandomIndexes.pushObject(index);
-        }
-      }
-      while (problems.length < 4) {
-        let termOne;
-        let termTwo;
-        switch (this.get('operator')) {
-          case '/':
-            termOne = t[uniqueRandomIndexes[problems.length]][0];
-            termTwo = t[uniqueRandomIndexes[problems.length]][1];
-            break;
-        }
+      while (problems.length < 10) {
         const problemGenerator = ProblemGenerator.create({
           operator: this.get('operator'),
           level: this.get('level')
