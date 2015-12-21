@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ProblemGenerator from 'little-professor/models/problem-generator';
 
 export default Ember.Controller.extend({
   levels: [1,2,3,4],
@@ -8,7 +9,9 @@ export default Ember.Controller.extend({
   isRetrying: Ember.computed.gt('tryCount', 0),
 
   problem: Ember.computed('problems', 'problemIndex', function() {
-    return this.get('problems').objectAt(this.get('problemIndex'));
+    if (Ember.isPresent(this.get('problems')) && Ember.isPresent(this.get('problemIndex'))) {
+      return this.get('problems').objectAt(this.get('problemIndex'));
+    }
   }),
 
   isComplete: Ember.computed('problems', 'problemIndex', function() {
@@ -51,10 +54,12 @@ export default Ember.Controller.extend({
 
   actions: {
     turnOn() {
-      this.set('isOn', true);
-      this.set('level', this.get('levels').objectAt(0));
-      this.set('operator', '+');
-      this.set('mode', 'settings');
+      if (!this.get('isOn')) {
+        this.set('isOn', true);
+        this.set('level', this.get('levels').objectAt(0));
+        this.set('operator', '+');
+        this.set('mode', 'settings');
+      }
     },
 
     turnOff() {
@@ -115,20 +120,12 @@ export default Ember.Controller.extend({
             termOne = t[uniqueRandomIndexes[problems.length]][0];
             termTwo = t[uniqueRandomIndexes[problems.length]][1];
             break;
-          case '-':
-            termOne = Math.floor(Math.random() * (10 + 1));
-            termTwo = Math.floor(Math.random() * (termOne + 1));
-            break;
-          default:
-            termOne = Math.floor(Math.random() * 10);
-            termTwo = Math.floor(Math.random() * 10);
         }
-        let problem = this.store.createRecord('problem', {
-          termOne: termOne,
-          termTwo: termTwo,
-          operator: this.get('operator')
+        const problemGenerator = ProblemGenerator.create({
+          operator: this.get('operator'),
+          level: this.get('level')
         });
-        problems.pushObject(problem);
+        problems.pushObject(problemGenerator.generate());
       }
       this.set('problems', problems);
       this.send('nextProblem');
@@ -179,11 +176,12 @@ export default Ember.Controller.extend({
               this.set('isIncorrect', true);
               Ember.run.later(this, function() {
                 this.set('isIncorrect', false);
-                this.set('isAnswerLocked', false);
                 if (this.get('tryCount') === 3) {
                   this.set('answer', this.get('problem.answer'));
                   this.toggleProperty('isDisplayingAnswer');
+                  this.set('isAnswerLocked', true);
                 } else {
+                  this.set('isAnswerLocked', false);
                   this.set('answer', null);
                 }
               }, 1000);
