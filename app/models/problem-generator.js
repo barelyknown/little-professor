@@ -10,10 +10,16 @@ export default Ember.Object.extend({
     switch (this.get('operator')) {
       case '+':
         switch (this.get('level')) {
+          case 1:
+            return 0;
+          case 2:
+            return 5;
           case 3:
             return 11;
           case 4:
             return 11;
+          default:
+            return 0;
         }
       case '-':
         return this.get('minAnswer') + this.get('minTermTwo');
